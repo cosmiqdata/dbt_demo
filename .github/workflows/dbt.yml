@@ -50,8 +50,8 @@ jobs:
 
       - name: Show dbt target (no secrets)
         run: |
-          sed -E 's/password:.*/password: ***redacted***/' ~/.dbt/profiles.yml
-          yq '.snowflake_profile.outputs.ci | {account, role, database, warehouse, schema}' ~/.dbt/profiles.yml
+          echo "==== profile preview ===="
+          grep -E 'account:|role:|database:|warehouse:|schema:' ~/.dbt/profiles.yml || true
     
       - name: dbt debug
         run: dbt debug --profiles-dir ~/.dbt --project-dir .
