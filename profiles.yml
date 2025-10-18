@@ -1,0 +1,15 @@
+snowflake_profile:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"     # e.g. xy12345.us-east-1
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"   # or keypair_auth options
+      role: "{{ env_var('SNOWFLAKE_ROLE') }}"           # R_DBT_DEV
+      database: "{{ env_var('SNOWFLAKE_DATABASE') }}"   # DBT_DEV
+      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE') }}" # WH_DBT_DEV
+      schema: "{{ env_var('SNOWFLAKE_SCHEMA') }}"       # MODELS
+      threads: 4
+      client_session_keep_alive: false
+      query_tag: "dbt_ci"

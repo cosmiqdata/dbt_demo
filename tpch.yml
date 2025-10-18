@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: tpch
+    database: SNOWFLAKE_SAMPLE_DATA
+    schema: TPCH_SF1
+    tables:
+      - name: CUSTOMER
+        columns:
+          - name: C_CUSTKEY
+            tests: [not_null, unique]
+      - name: ORDERS
+        columns:
+          - name: O_ORDERKEY
+            tests: [not_null, unique]
