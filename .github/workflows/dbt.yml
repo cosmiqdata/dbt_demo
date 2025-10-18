@@ -48,6 +48,11 @@ jobs:
                 query_tag: dbt_ci
           EOF
 
+      - name: Show dbt target (no secrets)
+        run: |
+          sed -E 's/password:.*/password: ***redacted***/' ~/.dbt/profiles.yml
+          yq '.snowflake_profile.outputs.ci | {account, role, database, warehouse, schema}' ~/.dbt/profiles.yml
+    
       - name: dbt debug
         run: dbt debug --profiles-dir ~/.dbt --project-dir .
 
